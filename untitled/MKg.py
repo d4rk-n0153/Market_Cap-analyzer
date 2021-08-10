@@ -96,12 +96,12 @@ class Ui_MarketCapgui(object):
         for k in self.sym:
             urlztitad=f'http://cdn.tsetmc.com/api/Instrument/GetInstrumentHistory/{dick.get(k)}/{self.gdate}'
             urllastprice=f'http://cdn.tsetmc.com/api/ClosingPrice/GetClosingPriceHistory/{dick.get(k)}/{self.gdate}'
-        if urlztitad not in self.url_ztitad:
-            self.url_ztitad.append(urlztitad)
-        if urllastprice not in self.url_lastprice:
-            self.url_lastprice.append(urllastprice)
+            if urlztitad not in self.url_ztitad:
+                self.url_ztitad.append(urlztitad)
+            if urllastprice not in self.url_lastprice:
+                self.url_lastprice.append(urllastprice)
             
-        print(self.url_lastprice)
+        print(len(self.url_lastprice))
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
