@@ -13,7 +13,7 @@ sym=[input(f'pls type ur symbol {i}: ') for i in range (1,Symbols_counts+1)]
 gdate=str(jd.date(int(dat[0]),int(dat[1]),int(dat[2])).togregorian()).replace('-','')
 
 
-url='https://d4rk-n0153.github.io/tsetmc/market-watch2.html'
+url_database='https://d4rk-n0153.github.io/tsetmc/market-watch2.html'
 
 
 response=rq.get(url)
@@ -44,15 +44,14 @@ for last_price in range(len(url_lastprice)):
     lastPrices.append(lastPrice)
 
 market_cap=[lastPrices[i]*total_shares[i]/(10000000000) for i in range(len(lastPrices))]
-                       
+                         
 df=DataFrame(index=(sym),columns=(sym))
 df.insert(len(market_cap),'ارزش بازار(میلیارد تومان)','none')
-
 for num1 in range(len(market_cap)):
     for num2 in range(len(market_cap)):
             df.loc[str(sym[num1]),str(sym[num2])]=(market_cap[num1]/market_cap[num2])
             df.loc[str(sym[num1]),'ارزش بازار(میلیارد تومان)']=round(market_cap[num1])
-               
+                   
 writer=ExcelWriter('MarketCap.xlsx', mode='w')
 df.to_excel(writer,sheet_name=gdate)
 writer.save()
