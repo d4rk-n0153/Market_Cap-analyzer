@@ -94,11 +94,11 @@ class Ui_MarketCapgui(object):
             if urllastprice not in self.url_lastprice:
                 self.url_lastprice.append(urllastprice)
         for ztitad in range(len(self.url_ztitad)):
-            response_zTitad=rq.get(self.url_ztitad[ztitad])
-            total_share=l(response_zTitad.text)['instrumentHistory'].get('zTitad')
+            response_zTitad=rq.get(self.url_ztitad[ztitad],headers={'User-Agent':'D4rk-N0153 was here'})
+            total_share=(l(response_zTitad.text))['instrumentHistory'].get('zTitad')
             self.total_shares.append(total_share)
         for last_price in range(len(self.url_lastprice)):
-            response_lastprice=rq.get(self.url_lastprice[last_price])
+            response_lastprice=rq.get(self.url_lastprice[last_price],headers={'User-Agent':'D4rk-N0153 was here'})
             lastPrice=l(response_lastprice.text)['closingPriceHistory'][0].get('pClosing')
             self.lastPrices.append(lastPrice)
             #print((lastPrice))
@@ -113,6 +113,7 @@ class Ui_MarketCapgui(object):
         df.to_excel(writer,sheet_name=self.gdate)
         writer.save()
         self.processtext.append('pls close everything tnx')
+        exit()
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
@@ -121,4 +122,5 @@ if __name__ == "__main__":
     ui.setupUi(MarketCapgui)
     MarketCapgui.show()
     sys.exit(app.exec_())
+    
 
